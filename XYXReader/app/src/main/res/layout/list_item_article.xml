@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
     android:layout_marginTop="4dp"
@@ -18,10 +19,16 @@
         <!--suppress AndroidLintContentDescription -->
         <com.example.xyzreader.ui.DynamicHeightNetworkImageView
             android:id="@+id/thumbnail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/photo_placeholder" />
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/photo_placeholder"
+            android:scaleType="centerCrop"
+            tools:background="@tools:sample/backgrounds/scenic"/>
+<LinearLayout
+    android:id="@+id/title_subtitle_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
         <TextView
             android:id="@+id/article_title"
             style="@style/TextAppearance.AppCompat.Subhead"
@@ -31,9 +38,10 @@
             android:paddingTop="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="4dp"
-            android:textColor="@color/ltgray"
+            android:textColor="@android:color/darker_gray"
             android:ellipsize="end"
-            android:maxLines="4" />
+            android:maxLines="4"
+            tools:text="@tools:sample/lorem"/>
 
         <TextView
             android:id="@+id/article_subtitle"
@@ -46,6 +54,7 @@
             android:textColor="#6000"
             android:maxLines="2"
             android:ellipsize="end" />
+    </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
