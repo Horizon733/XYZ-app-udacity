@@ -124,17 +124,17 @@ public class ArticleDetailActivity extends AppCompatActivity
 
         // Select the start ID
         if (mStartId > 0) {
-            mCursor.moveToFirst();
-            // TODO: optimize
-            while (!mCursor.isAfterLast()) {
-                if (mCursor.getLong(ArticleLoader.Query._ID) == mStartId) {
-                    final int position = mCursor.getPosition();
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                if (cursor.getLong(ArticleLoader.Query._ID) == mStartId) {
+                    final int position = cursor.getPosition();
+                    mCursor = cursor;
+                    mPagerAdapter.notifyDataSetChanged();
                     mPager.setCurrentItem(position, false);
                     break;
                 }
-                mCursor.moveToNext();
+                cursor.moveToNext();
             }
-            mStartId = 0;
         }
     }
 

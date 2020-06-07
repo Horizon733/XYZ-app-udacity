@@ -1,6 +1,5 @@
 <com.example.xyzreader.ui.DrawInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/draw_insets_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -23,14 +22,12 @@
                 <ImageView
                     android:id="@+id/photo"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:scaleType="fitCenter"
-                    tools:background="@tools:sample/cities"
-                     />
+                    android:layout_height="wrap_content"
+                    />
 
-                <androidx.appcompat.widget.Toolbar
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="112dp"
                     android:background="@drawable/photo_background_protection" />
 
             </FrameLayout>
@@ -41,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:maxWidth="@dimen/detail_card_max_width"
-                android:background="@color/theme_primary_light"
+                android:background="@android:color/white"
                 android:elevation="2dp"
                 android:layout_marginTop="@dimen/detail_card_top_margin">
 
@@ -49,7 +46,7 @@
                     android:id="@+id/meta_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/theme_primary_dark"
+                    android:background="#333"
                     android:layout_gravity="bottom"
                     android:orientation="vertical"
                     android:paddingLeft="@dimen/detail_inner_horiz_margin"
@@ -68,16 +65,14 @@
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:textSize="@dimen/detail_title_text_size"
-                        android:lineSpacingMultiplier="0.9"
-                        tools:text="Title"/>
+                        android:lineSpacingMultiplier="0.9" />
 
                     <TextView
                         android:id="@+id/article_byline"
                         style="?android:attr/textAppearanceSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        tools:text="@tools:sample/date/mmddyy"/>
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
 
                 <TextView
@@ -88,28 +83,30 @@
                     android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
                     android:layout_marginRight="@dimen/detail_inner_horiz_margin"
                     android:paddingBottom="@dimen/detail_body_bottom_margin"
+
                     android:textColor="@android:color/black"
                     android:textColorLink="@color/theme_accent"
-                    android:layout_gravity="left"
                     android:textSize="@dimen/detail_body_text_size"
                     android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier" />
 
             </com.example.xyzreader.ui.MaxWidthLinearLayout>
         </FrameLayout>
-
     </com.example.xyzreader.ui.ObservableScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/share_fab"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:background="@drawable/add_fab_background"
-        android:src="@drawable/ic_share"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
         app:fabSize="normal"
-        app:elevation="6dp"
-        app:borderWidth="0dp"
-        android:layout_gravity="end|bottom"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:src="@drawable/ic_share"
+        android:contentDescription="@string/action_share"
+        android:clickable="true"
+        android:background="@drawable/add_fab_background"
+        app:elevation="@dimen/fab_elevation"
+        android:layout_gravity="bottom|end"
+        app:pressedTranslationZ="@dimen/fab_press_translation_z"
+        android:focusable="true" />
 
 </com.example.xyzreader.ui.DrawInsetsFrameLayout>
+
