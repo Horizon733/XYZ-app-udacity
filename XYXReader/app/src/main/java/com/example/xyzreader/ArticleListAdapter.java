@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -70,37 +71,27 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
         return vh;
     }
 
-    private Date parsePublishedDate() {
-        try {
-            String date = mCursor.getString(ArticleLoader.Query.PUBLISHED_DATE);
-            return dateFormat.parse(date);
-        } catch (ParseException ex) {
-            Log.e(ArticleListActivity.TAG, ex.getMessage());
-            Log.i(ArticleListActivity.TAG, "passing today's date");
-            return new Date();
-        }
-    }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         mCursor.moveToPosition(position);
-        holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
 
-        String image = mCursor.getString(ArticleLoader.Query.THUMB_URL);
+
         String title = mCursor.getString(ArticleLoader.Query.TITLE);
         String subtitle = DateUtils.getRelativeTimeSpanString(
                 mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
                 System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                 DateUtils.FORMAT_ABBREV_ALL).toString();
         String author = mCursor.getString(ArticleLoader.Query.AUTHOR);
+        String image = mCursor.getString(ArticleLoader.Query.THUMB_URL);
         holder.titleView.setText(title);
         holder.subtitleView.setText(subtitle);
         holder.authorView.setText(author);
+        holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
+
         ImageLoader loader = ImageLoaderHelper.getInstance(mContext).getImageLoader();
         holder.thumbnailView.setImageUrl(image, loader);
         loader.get(image, new ImageLoader.ImageListener() {
-
-
             @Override
             public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                 Bitmap bitmap = imageContainer.getBitmap();
@@ -117,8 +108,6 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
             }
         });
 
-        holder.thumbnailView.setImageUrl(image,loader);
-        holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
     }
 
     @Override
